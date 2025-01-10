@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../features/cart/cartSlide';
 import productImage from '../../src/assets/image-product.jpg';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const ProductCard = ({ product }) => {
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.items);
     const isInCart = cartItems.some((item) => item.id === product.id);
@@ -26,8 +29,8 @@ const ProductCard = ({ product }) => {
             </div>
             {isInCart ? (
                 <button
-                    onClick={() => (window.location.href = '/cart')}
                     className="bg-primary text-white px-4 py-2 mt-2 rounded"
+                    onClick={() => navigate('/cart')}
                 >
                     Ver carrito
                 </button>
