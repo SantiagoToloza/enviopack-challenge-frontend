@@ -13,7 +13,7 @@ const Navbar = () => {
             </div>
             <div className="flex gap-4">
                 <span>{profilename}</span>
-                <Link to="/cart">Carrito ({cartItems.length})</Link>
+                <Link to="/cart" className={`${cartItems.length > 0 ? 'font-bold' : 'font-normal'} `} >Carrito ({cartItems.length})</Link>
                 <span>Crédito: ${credit}</span>
             </div>
         </nav>

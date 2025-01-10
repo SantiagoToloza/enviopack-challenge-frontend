@@ -1,14 +1,25 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-
+import { deductCredit, resetCredit } from '../features/credit/creditSlice';
 import ShopCard from '../components/ShopCard';
 const Carrito = () => {
 
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.items);
+    const credit = useSelector((state) => state.credit.balance);
     const navigate = useNavigate();
     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+
+    const handleCheckout = () => {
+        if (credit >= total) {
+            dispatch(deductCredit(total));
+            navigate('/success');
+        } else {
+            navigate('/error');
+        }
+    };
 
     return (
         <div className='w-full '>
@@ -33,7 +44,7 @@ const Carrito = () => {
                     </div>
                     <div className='flex justify-between  mt-10 mx-3'>
                         <button className='bg-black text-white p-1.5 rounded-[5px] ' onClick={() => navigate('/')}>Volver al catálogo</button>
-                        <button className='bg-black text-white p-1.5 rounded-[5px] '> Finalizar compra</button>
+                        <button className='bg-black text-white p-1.5 rounded-[5px] ' onClick={handleCheckout}> Finalizar compra</button>
                     </div>
                 </div>
             </div>
