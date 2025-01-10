@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../features/cart/cartSlide';
 import productImage from '../../src/assets/image-product.jpg';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types'
 const ProductCard = ({ product }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.items);
-    const isInCart = cartItems.some((item) => item.id === product.id);
+    const isInCart = Array.isArray(cartItems) && cartItems.some((item) => item.id === product.id);
 
     const handleAddToCart = () => {
         dispatch(addItem(product));
@@ -44,6 +44,14 @@ const ProductCard = ({ product }) => {
             )}
         </div>
     );
+};
+
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default ProductCard;

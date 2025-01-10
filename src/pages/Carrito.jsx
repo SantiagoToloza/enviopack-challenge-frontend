@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { deductCredit, resetCredit } from '../features/credit/creditSlice';
+import { deductCredit } from '../features/credit/creditSlice';
+import { clearCart } from '../features/cart/cartSlide';
 import ShopCard from '../components/ShopCard';
 const Carrito = () => {
 
@@ -16,6 +17,7 @@ const Carrito = () => {
         if (credit >= total) {
             dispatch(deductCredit(total));
             navigate('/success');
+            dispatch(clearCart());
         } else {
             navigate('/error');
         }

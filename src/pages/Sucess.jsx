@@ -7,8 +7,8 @@ const Sucess = () => {
             <h1 className="text-2xl font-bold mb-4">Estado de compra</h1>
             <div className='w-full rounded-lg shadow-md flex flex-col items-center p-4 flex-wrap'>
                 <p>La compra se realizo con exito</p>
-                <Link to="/cart" className="bg-black text-white px-4 py-2 rounded mt-4 w-full  ">
-                    Volver al carrito
+                <Link to="/" className="bg-black text-white px-4 py-2 rounded mt-4 w-full  ">
+                    Volver al catalogo
                 </Link>
             </div>
         </div>
